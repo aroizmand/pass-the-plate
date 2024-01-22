@@ -19,7 +19,7 @@ Our application is uniquely designed to address the pressing issues of food wast
 
 ![Alt text](passThePlateDemo.gif)
 
-## Tech
+## Tech Stack
 
 ![](https://skills.thijs.gg/icons?i=js,react,html,css,python,django)
 
