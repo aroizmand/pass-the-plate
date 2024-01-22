@@ -1,0 +1,55 @@
+from rest_framework import permissions
+from rest_framework.generics import GenericAPIView
+from rest_framework.request import Request
+from rest_framework.permissions import BasePermission
+ 
+from django.db import models
+ 
+class UserPermission(permissions.BasePermission):
+    """
+    source: https://stackoverflow.com/questions/19313314/django-rest-framework-viewset-per-action-permissions
+    """
+ 
+    def has_permission(self, request: Request, view: GenericAPIView) -> bool:
+         
+        if view.action == "create":
+            return True # anyone can create user, no additional checks needed.
+        if view.action == "list":
+            return request.user.is_authenticated and request.user.is_staff
+        elif view.action in ["retrieve", "update", "partial_update", "destroy"]:
+            return True  # defer to has_object_permission
+        else:
+            return False
+ 
+    def has_object_permission(
+        self, request: Request, view: GenericAPIView, obj: models.Model
+    ) -> bool:
+ 
+        if not request.user.is_authenticated:
+            return False
+ 
+        if view.action in ["retrieve", "update", "partial_update"]:
+            return obj == request.user or request.user.is_staff
+        elif view.action == "destroy":
+            return request.user.is_staff
+        else:
+            return False
+class IsSelfOrReadOnly(BasePermission):
+    """
+    Custom permission to only allow users to edit their own details.
+    """
+
+    def has_object_permission(self, request, view, obj):
+        # Allow GET, HEAD, and OPTIONS requests.
+        if request.method in ["GET", "HEAD", "OPTIONS"]:
+            return True
+
+        # Check if the user making the request is the same as the user being updated.
+        return obj == request.user
+    
+# Permissions for only allowing model owner to edit the model
+class IsOwnerOrReadOnly(permissions.BasePermission):
+     def has_object_permission(self, request, view, obj):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        return obj.owner == request.user
