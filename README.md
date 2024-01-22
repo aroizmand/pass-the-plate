@@ -9,7 +9,7 @@ A mobile food sharing application for the UBCO COSC 499 Capstone Project.
 - [Alex Roizman](https://github.com/aroizmand)
 - [Brandon Mack](https://github.com/brandonjmack)
 
-**Please note: This is a snapshot of the project as the original repo remains private until the end of the school yeah (May 2024). It will be periodically updated**
+**Please note: This is a snapshot of the project as the original repo remains private until the end of the school year (May 2024). It will be periodically updated**
 
 ## Overview
 
