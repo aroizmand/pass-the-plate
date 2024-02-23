@@ -17,7 +17,13 @@ Our application is uniquely designed to address the pressing issues of food wast
 
 ## Demo
 
-![Alt text](media/passThePlateDemo.mp4)
+### Current Demo
+
+Click [here](https://youtu.be/jbVbtkmKcIA) for current demo!
+
+### Demo as of December 2023
+
+![Alt text](media/passThePlateDemo.gif)
 
 ## Tech Stack
 
